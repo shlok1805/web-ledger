@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'webledger.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default' : config('DATABASE_URL')
+    'default' : "postgres://rmbdrctrlkfxrr:a92b5e1279d05cd04cf93c431d4164db6b560c9f331a4a952fa6ff3ca08e3284@ec2-108-128-104-50.eu-west-1.compute.amazonaws.com:5432/degk4velgi7vka"
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
