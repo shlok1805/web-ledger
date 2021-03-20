@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <form action="{% url 'loginuser' %}"method='POST' style="width:400px; margin:auto;">
+          {% csrf_token %}
+      <h1 style="padding-left:5rem; padding-top:1rem">Login Form</h1>
+      <div class="alert alert-danger" role="alert">
+        {{error}}
+      </div>
+      <div class="form-group" style="padding:0.5rem">
+        <label style="padding-down:1rem" for="id_username">Username:</label>
+        <input class="form-control" type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+      </div>
+      <div class="form-group" style="padding:0.5rem">
+        <label style="padding-down:1rem" for="id_password">Password:</label>
+        <input class="form-control" type="password" name="password" autocomplete="current-password" required="" id="id_password">
+      </div>
+      <button class="btn btn-outline-primary" style="width:100px; margin:0.5rem;" type="submit">Login</button>
+    </form>
+    <!-- <h2>{{ error }}</h2> -->
+  </body>
+</html>

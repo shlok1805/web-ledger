@@ -1,0 +1,127 @@
+{% extends 'ledger/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+#clear{
+  color:green;
+}
+#unclear{
+  color:red;
+}
+</style>
+<br>
+
+<div class="">
+      <div class="d-flex justify-content-between" style="padding:2.5%">
+        <div class="d-flex">
+          <div class="d-flex" style="padding-right:5%;">
+            <p style="font-weight:bold; margin:0.5rem;">Name: </p>
+            <p style="margin:0.5rem;">{{ dealer.name }}</p>
+          </div>
+          <div class="d-flex" style="padding-right:5%;">
+            <p style="font-weight:bold; margin:0.5rem;">Address: </p>
+            <p style="margin:0.5rem;">{{ dealer.address }}</p>
+          </div>
+          <div class="d-flex" style="padding:0 0.25%;">
+            <p style="font-weight:bold; margin:0.5rem;">Mobile: </p>
+            <p style="margin:0.5rem;">{{ dealer.mob_num }}</p>
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-primary btn-block" href="{% url 'ledger' dealer.id %}" style="margin:0.5rem;">Create Entry</a>
+        </div>
+      </div>
+    <div class="" style="padding:0% 2.5%;">
+      <div class="card card-body">
+        <table class="table table-bordered ">
+          <tr>
+            <th>Date</th>
+            <th>Particulars</th>
+            <th>Invoice</th>
+            <th>Mode</th>
+            <th>Collected By</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Dr/Cr</th>
+            <th>Balance</th>
+            <th>Cheque Clearance</th>
+          </tr>
+
+          {% for ledger in orderedledger %}
+          <tr>
+            <td>{{ ledger.date|date:"d M Y" }}  {{ ledger.date|time:"h:i A" }}</td>
+            <td>{{ ledger.particulars }}</td>
+            {% if ledger.invoice %}
+            <td><a href="{{ ledger.invoice.url }}">Invoice</a></td>
+            {% else %}
+            <td></td>
+            {% endif %}
+            {% if ledger.paymode == 'Cheque' and ledger.isChequeCleared == False %}
+            <td id="unclear"><u>Cheque</u></td>
+            {% elif ledger.paymode == 'Cheque' and ledger.isChequeCleared == True%}
+            <td id="clear"><u>Cheque</u></td>
+            {% else %}
+            <td>{{ledger.paymode}}</td>
+            {% endif %}
+            <td>{{ ledger.collect_by }}</td>
+            <td>{{ ledger.debit }}</td>
+            <td>{{ ledger.credit }}</td>
+            <td>{{ ledger.dr_cr }}</td>
+            <td>{{ ledger.balance }}</td>
+            <td id="{{ledger.id}}">
+            {% if ledger.paymode == 'Cheque' and ledger.isChequeCleared == False %}
+            <!--a href="{% url 'cheque_alter' ledger.dealer_ledger_number pk %} " id="clear"><span>Clear This Cheque</span></a -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ledger.id}}">
+              Clear this Cheque
+            </button>
+            {% elif ledger.paymode == 'Cheque' and ledger.isChequeCleared == True %}
+              cheque is cleared
+            {% endif %}
+            </td>
+          </tr>
+          {% if ledger.paymode == 'Cheque' and ledger.isChequeCleared == False %}
+          <div class="modal fade" id="{{ledger.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+                </div>
+                <div class="modal-body">
+                  Are you sure this cheque is cleared?
+                </div>
+                <div class="modal-footer">
+                  <a class="btn btn-primary" href="{% url 'cheque_alter' ledger.dealer_ledger_number pk %} "><span>Clear This Cheque!!</span></a >
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          {% endif %}
+          {% endfor %}
+          <script>
+          function geek() {
+            var doc;
+            var result = confirm("Press a button!");
+            if (result == true) {
+                doc = "OK was pressed.";
+            } else {
+                doc = "Cancel was pressed.";
+            }
+
+        }
+          </script>
+          </table>
+        </div>
+      </div>
+    </div>
+<div class="d-flex justify-content-center">
+{% if orderedledger.has_previous %}
+<a class="btn btn-outline-primary" style="margin:0.5rem;" href="?page={{orderedledger.previous_page_number}}">Next Page</a>
+{% endif %}
+{% if orderedledger.has_next %}
+<a class="btn btn-outline-primary" style="margin:0.5rem;" href="?page={{orderedledger.next_page_number}}">Previous Page</a>
+{% endif %}
+</div>
+{% endblock %}

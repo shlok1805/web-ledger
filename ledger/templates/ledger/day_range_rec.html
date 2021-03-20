@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Transactions PDF</title>
+    <style>
+
+      @page {
+      size: "A4";
+      margin: 1.5cm 1.5cm 3.5cm 1.5cm; }
+      @top-center{
+        content: "Dealer Balance";
+      }
+      @bottom-right {
+        content: "page " counter() page " of  " counter(pages);
+        }
+      body {
+        background-color:white;
+
+  }
+
+
+
+
+
+  th {
+    font-size: 15px;
+
+  }
+
+  td {
+    font-size: 12.5px;
+  }
+  table, th, td {
+    text-align: center;
+    padding-top: 5px;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  .dealer-col {
+    width: 400px;
+  }
+
+  h1, h3 {
+    text-align: center;
+    padding: 0;
+    margin:0;
+  }
+  h3 {
+    font-weight: 200;
+  }
+
+  body {
+    margin-top:5px;
+    padding-top:5px;
+  }
+
+
+
+
+</style>
+  </head>
+  <body>
+
+    <h1>Transactions from {{ fromdate }} to {{ todate }}</h1>
+
+
+    <table repeat="1" class="table table-sm">
+
+      <tr>
+        <th>Dealer</th>
+        <th>Date</th>
+        <th>Particulars</th>
+        <th>Mode</th>
+        <th>Debit</th>
+        <th>Credit</th>
+        <th>Dr/Cr</th>
+        <th>Balance</th>
+      </tr>
+
+      {% for ledger in ledgers %}
+      <tr>
+        <td>{{ ledger.dealer }}</td>
+        <td>{{ ledger.date|date:"d M Y" }}  {{ ledger.date|time:"h:i A" }}</td>
+        <td>{{ ledger.particulars }}</td>
+        <td>{{ ledger.paymode }}</td>
+        <td>{{ ledger.debit }}</td>
+        <td>{{ ledger.credit }}</td>
+        <td>{{ ledger.dr_cr }}</td>
+        <td>{{ ledger.balance }}</td>
+      </tr>
+      {% endfor %}
+
+
+      </table>
+
+  </body>
+</html>

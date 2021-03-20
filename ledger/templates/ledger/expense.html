@@ -1,0 +1,25 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Expense{% endblock %}
+{% block content %}
+
+<form method='POST' style="width:400px; margin:auto;">
+  <h1 style="padding-left:4rem; padding-top:1rem">Road Expense</h1>
+  <div style="display:none;">{{ form.user }}</div>
+  {% csrf_token %}
+  <div class="form-group" style="padding:0.5rem">
+    <label for="id_fooding" style="padding-down:1rem">Fooding:</label>
+    <input class="form-control"  type="number" name="fooding" value="0" min="0" id="id_fooding">
+  </div>
+  <div class="form-group" style="padding:0.5rem">
+    <label for="id_fuel" style="padding-down:1rem">Fuel:</label>
+    <input class="form-control" type="number" name="fuel" value="0" min="0" id="id_fuel">
+  </div>
+  <div class="form-group" style="padding:0.5rem">
+    <label for="id_misc" style="padding-down:1rem">Misc:</label>
+    <textarea class="form-control" style="height:150px" name="misc" cols="40" rows="10" id="id_misc"></textarea>
+  </div>
+  <button class="btn btn-outline-primary" style="width:100px; margin:0.5rem;" type='submit'>Save</button>
+
+</form>
+
+{% endblock %}

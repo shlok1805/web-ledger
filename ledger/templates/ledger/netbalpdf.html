@@ -1,0 +1,136 @@
+{% load mathfilters %}
+<html>
+
+<head>
+  <meta charset = "utf-8">
+
+  <title>Dealer Balance PDF</title>
+  <style>
+
+    @page {
+    size: "A4";
+    margin: 1.5cm 1.5cm 3.5cm 1.5cm;
+  }
+    @top-center{
+      content: "Dealer Balance";
+    }
+    @bottom-right {
+      content: "page " counter() page " of  " counter(pages);
+    }
+    body {
+      background-color:white;
+
+}
+
+/* table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;} */
+/* td {
+  text-align: center;
+
+} */
+th {
+  font-size: 20px;
+
+}
+
+td {
+  font-size: 12.5px;
+}
+table, th, td {
+  text-align: center;
+  padding-top: 5px;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.dealer-col {
+  width: 400px;
+}
+
+h1, h3 {
+  text-align: center;
+  padding: 0;
+  margin:0;
+}
+h3 {
+  font-weight: 200;
+}
+
+body {
+  margin-top:5px;
+  padding-top:5px;
+}
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+
+<h1>S.J.N.M.</h1>
+<h3>Mohania</h3>
+<br>
+<h1>Sundry Debtors</h1>
+<h3>Group Summary</h3>
+<h3>{{ today }}</h3>
+
+
+
+
+
+
+  <div class="container">
+  <table repeat="3" class="table table-dark table-hover">
+
+
+
+      <tr>
+          <th class="dealer-col" rowspan="2">Dealer</th>
+          <th colspan="2" style="font-size:1.5rem">Closing Balance</th>
+
+
+      </tr>
+      <tr>
+      <td>Debit</td>
+      <td>Credit</td>
+      </tr>
+
+
+
+
+
+<tr>
+  <br>
+</tr>
+
+
+
+
+  {% for i in a %}
+  <tr>
+    <td>{{ i.dealer }}</td>
+  {% if i.balance < 0 %}
+  <td></td>
+  <td>{{ i.balance|abs }}</td>
+  {% else %}
+  <td>{{ i.balance }}</td>
+  <td></td>
+  {% endif %}
+
+  </tr>
+
+
+
+  {% endfor %}
+
+
+  </table>
+
+  </div>
+</body>
+
+
+</html>

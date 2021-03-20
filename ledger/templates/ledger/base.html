@@ -1,0 +1,117 @@
+{% load auth_extras %}
+<!DOCTYPE html>
+<html>
+{% if user.is_authenticated %}
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+{% block css %}{% endblock %}
+  <style>
+        .logout-container {
+          width: 50% ;
+          display: flex;
+          justify-content: end;
+        }
+
+        .item-container {
+          display: flex;
+        }
+
+        #accordion {
+            padding : 0 20rem;
+          }
+
+        @media only screen and (max-width: 1300px) {
+          .item-left {
+            margin: 0;
+            padding: 0.5rem;
+          }
+        }
+
+        @media only screen and (max-width: 991px) {
+          .item-container {
+            flex-direction: column;
+            margin-top: 1rem;
+          }
+
+          .logout-container {
+            width: 100% ;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .item-left {
+            padding: 0.5rem;
+          }
+
+          #accordion {
+            padding : 0 10rem;
+          }
+        }
+  </style>
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav" style="width:100%">
+          {% if request.user|has_group:"admin" %}
+          <div class="item-container" style="width:50%;">
+            <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'home' %}">Home</a>
+            <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'netbalpdf' %}">Dealer Report</a>
+            <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'dailytrans' %}">Transactions</a>
+            {% else %}
+            <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'userpage' %}">Home</a>
+            {% endif %}
+            <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'roadexpense' %}">Expense</a>
+            {% if request.user.is_superuser %}
+            <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'admin:index' %}">Admin</a>
+            {% endif %}
+          </div>
+          <div class="logout-container">
+            <a class="item-left nav-link" style="color:#0d6efd; margin-right:1rem">Logged in as {{ user.username }}</a>
+            <form style="margin-top:0px;" action="{% url 'logoutuser'  %}" method="POST">
+                {% csrf_token %}
+
+              <button class="btn btn-outline-success" type="submit" >Logout</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+{% block content %}{% endblock %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+// for ledger.html page
+
+  var q = document.getElementById("id_collect_by");
+  var p = document.getElementById("id_paymode");
+  //console.log(q) ;
+  q.classList.add("form-select") ;
+  q.options[0].innerHTML = "None";
+  p.classList.add("form-select") ;
+
+
+
+</script>
+</body>
+{% endif %}
+</html>

@@ -1,0 +1,65 @@
+{% extends 'ledger/base.html' %}
+{% block content %}
+{% load static %}
+{{ message }}
+
+<div class="accordion" id="accordionExample" style="margin-top: 50px;">
+{% for ledger in ledgers %}
+    <div class="card" style="background-color: white; border:none;" data-toggle="collapse" data-target="#collapse{{ ledger.dealerid }}" aria-expanded="true"
+    aria-controls="collapse{{ ledger.dealerid }}">
+        <div class="card-header" style="background-color: white; border:none; padding-top:2rem ;"  id="heading{{ ledger.dealerid }}">
+            <div id="accordion" class="mb-0" style="display:flex-col; justify-content:space-between;">
+              <p>Dealer Name: {{ ledger.name }}</p>  
+              {% if ledger.address %}<p>Address: {{ ledger.address}}</p>{% endif %}
+              {% if ledger.mobile %}<p>Mobile: {{ ledger.mobile}}</p>{% endif %}
+              <div style="border-bottom:1px solid gray"></div> 
+            </div>
+
+        </div>
+        <div id="collapse{{ ledger.dealerid }}" class="collapse " aria-labelledby="heading{{ ledger.dealerid }}" data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="card" style="padding: 1rem;">
+              <div style="display: flex; flex-direction: row-reverse;margin-bottom: 1rem;">
+                <a class="btn btn-primary btn-block" href="{% url 'ledger' ledger.dealerid %}">Create Entry</a>
+              </div>
+              <table class="table table-sm">
+                <tr>
+                  <th>Date</th>
+                  <th>Particulars</th>
+                  <th>Invoice</th>
+                  <th>Mode</th>
+                  <th>Collected By</th>
+                  <th>Debit</th>
+                  <th>Credit</th>
+                  <th>Dr/Cr</th>
+                  <th>Balance</th>
+                </tr>
+
+                {% for l in ledger.ledger %}
+                <tr>
+                  <td>{{ l.date }}</td>
+                  <td>{{ l.particulars }}</td>
+                  {% if l.invoice %}
+                  <td><a href="{{ l.invoice.url }}">Invoice</a></td>
+                  {% else %}
+                  <td></td>
+                  {% endif %}
+                  <td>{{ l.paymode }}</td>
+                  <td>{{ l.collect_by }}</td>
+                  <td>{{ l.debit }}</td>
+                  <td>{{ l.credit }}</td>
+                  <td>{{ l.dr_cr }}</td>
+                  <td>{{ l.balance }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% csrf_token %}
+
+
+{% endblock %}
