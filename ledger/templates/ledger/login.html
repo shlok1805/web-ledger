@@ -11,9 +11,11 @@
     <form action="{% url 'loginuser' %}"method='POST' style="width:400px; margin:auto;">
           {% csrf_token %}
       <h1 style="padding-left:5rem; padding-top:1rem">Login Form</h1>
+      {% if error %}
       <div class="alert alert-danger" role="alert">
         {{error}}
       </div>
+      {% endif %}
       <div class="form-group" style="padding:0.5rem">
         <label style="padding-down:1rem" for="id_username">Username:</label>
         <input class="form-control" type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
