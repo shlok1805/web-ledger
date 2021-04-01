@@ -10,7 +10,7 @@
 {% block css %}{% endblock %}
   <style>
         .logout-container {
-          width: 50% ;
+          width: 25% ;
           display: flex;
           justify-content: end;
         }
@@ -64,7 +64,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav" style="width:100%">
           {% if request.user|has_group:"admin" %}
-          <div class="item-container" style="width:50%;">
+          <div class="item-container" style="width:75%;">
             <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'home' %}">Home</a>
             <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'netbalpdf' %}">Dealer Report</a>
             <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'dailytrans' %}">Transactions</a>
@@ -76,7 +76,7 @@
             <a class="item-right nav-link" style="padding:0.5rem" href="{% url 'admin:index' %}">Admin</a>
             {% endif %}
           </div>
-          <div class="logout-container">
+          <div class="logout-container justify-content-end">
             <a class="item-left nav-link" style="color:#0d6efd; margin-right:1rem">Logged in as {{ user.username }}</a>
             <form style="margin-top:0px;" action="{% url 'logoutuser'  %}" method="POST">
                 {% csrf_token %}

@@ -10,7 +10,7 @@
   <body>
     <form action="{% url 'loginuser' %}"method='POST' style="width:400px; margin:auto;">
           {% csrf_token %}
-      <h1 style="padding-left:5rem; padding-top:1rem">Login Form</h1>
+      <h1 style="padding-left:3.5rem; padding-top:11rem; font-family: 'Montserrat', sans-serif; color: #dc143c;">WEB LEDGER</h1>
       {% if error %}
       <div class="alert alert-danger" role="alert">
         {{error}}
@@ -24,7 +24,7 @@
         <label style="padding-down:1rem" for="id_password">Password:</label>
         <input class="form-control" type="password" name="password" autocomplete="current-password" required="" id="id_password">
       </div>
-      <button class="btn btn-outline-primary" style="width:100px; margin:0.5rem;" type="submit">Login</button>
+      <button class="btn btn-outline-primary" style="width:100px; margin-top:1.5rem; margin-left:9.2rem;" type="submit">Login</button>
     </form>
     <!-- <h2>{{ error }}</h2> -->
   </body>
