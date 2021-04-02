@@ -27,7 +27,7 @@ SECRET_KEY = 'oy-yhetr8b)q8(-(u&2*0_7a(_8@b)@xby*qm^lf!51)(a)3b2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['web-leger.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['webledger.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -89,26 +89,26 @@ WSGI_APPLICATION = 'webledger.wsgi.application'
 
 #  Heroku Free Database
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default="postgres://rmbdrctrlkfxrr:a92b5e1279d05cd04cf93c431d4164db6b560c9f331a4a952fa6ff3ca08e3284@ec2-108-128-104-50.eu-west-1.compute.amazonaws.com:5432/degk4velgi7vka"
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default="postgres://rmbdrctrlkfxrr:a92b5e1279d05cd04cf93c431d4164db6b560c9f331a4a952fa6ff3ca08e3284@ec2-108-128-104-50.eu-west-1.compute.amazonaws.com:5432/degk4velgi7vka"
+#     )
+# }
 
 
 
 # Postgres Database for deployment
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'Web-Ledger_DB',
-#         'USER': 'postgres',
-#         'PASSWORD':'shyam123',
-#         'HOST':'localhost',
-#         'PORT':'5432'
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Web-Ledger_DB',
+        'USER': 'postgres',
+        'PASSWORD':'shyam123',
+        'HOST':'localhost',
+        'PORT':'5432'
+    }
+}
 
 
 # Password validation
@@ -150,10 +150,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
