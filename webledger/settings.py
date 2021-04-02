@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-# import dj_database_url
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -89,26 +89,26 @@ WSGI_APPLICATION = 'webledger.wsgi.application'
 
 #  Heroku Free Database
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default="postgres://rmbdrctrlkfxrr:a92b5e1279d05cd04cf93c431d4164db6b560c9f331a4a952fa6ff3ca08e3284@ec2-108-128-104-50.eu-west-1.compute.amazonaws.com:5432/degk4velgi7vka"
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default="postgres://rmbdrctrlkfxrr:a92b5e1279d05cd04cf93c431d4164db6b560c9f331a4a952fa6ff3ca08e3284@ec2-108-128-104-50.eu-west-1.compute.amazonaws.com:5432/degk4velgi7vka"
+    )
+}
 
 
 
 # Postgres Database for deployment
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Web-Ledger_DB',
-        'USER': 'postgres',
-        'PASSWORD':'shyam123',
-        'HOST':'localhost',
-        'PORT':'5432'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Web-Ledger_DB',
+#         'USER': 'postgres',
+#         'PASSWORD':'shyam123',
+#         'HOST':'localhost',
+#         'PORT':'5432'
+#     }
+# }
 
 
 # Password validation
