@@ -1,6 +1,6 @@
 # web-ledger
 
-• Designed the front-end of a fully functional website that allowed an organisation to maintain all of its transcations under
+• Designed the front-end of a fully functional website that allowed an organisation to maintain all of its transactions under
 a same application.
 • Designed an interface that managed different group of employees with a different view and restricted functionalities in
 the website.
