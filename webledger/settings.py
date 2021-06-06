@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'oy-yhetr8b)q8(-(u&2*0_7a(_8@b)@xby*qm^lf!51)(a)3b2'
+SECRET_KEY = 'your_secret_key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'webledger.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default="postgres://rmbdrctrlkfxrr:a92b5e1279d05cd04cf93c431d4164db6b560c9f331a4a952fa6ff3ca08e3284@ec2-108-128-104-50.eu-west-1.compute.amazonaws.com:5432/degk4velgi7vka"
+        default="postgres://your_id"
     )
 }
 
@@ -104,7 +104,7 @@ DATABASES = {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'Web-Ledger_DB',
 #         'USER': 'postgres',
-#         'PASSWORD':'shyam123',
+#         'PASSWORD':'your_password',
 #         'HOST':'localhost',
 #         'PORT':'5432'
 #     }
